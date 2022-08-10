@@ -12,7 +12,7 @@ export function Header() {
                     Takeoff Staff
                 </Typography>
                 <Button variant="outlined" color="inherit">
-                    Log In
+                    Log Out
                 </Button>
             </Toolbar>
         </AppBar>
