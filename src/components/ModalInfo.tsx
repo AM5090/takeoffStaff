@@ -1,20 +1,22 @@
 import { Button, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
+import { IContactItem } from "../store/rootAction";
 
 interface IModalInfoProps {
     title?: string,
     onClose?: () => void,
+    contactItem?: IContactItem,
 }
 
-export function ModalInfo({title, onClose}: IModalInfoProps) {
+export function ModalInfo({title, onClose, contactItem}: IModalInfoProps) {
     return (
         <>
             <DialogTitle sx={{color: 'gray', fontSize: '1rem', fontWeight: '400'}}>{title}</DialogTitle>
             <DialogContent>
                 <DialogContentText>
-                    Json Stathem
+                    {contactItem?.name}
                 </DialogContentText>
                 <DialogContentText>
-                    +777 777 77 77
+                    {contactItem?.phone}
                 </DialogContentText>
             </DialogContent>
             <DialogActions>

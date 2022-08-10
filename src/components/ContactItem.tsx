@@ -5,8 +5,13 @@ import { Modal } from "./Modal";
 import { useState } from "react";
 import { ModalInfo } from "./ModalInfo";
 import { ModalAction } from "./ModalAction";
+import { IContactItem } from "../store/rootAction";
 
-export function ContactItem() {
+interface IContactItemProps {
+    contactItem: IContactItem;
+}
+
+export function ContactItem({contactItem}: IContactItemProps) {
 
     const [openDelete, setOpenDelete] = useState(false); 
     const [openEdit, setOpenEdit] = useState(false);    
@@ -26,8 +31,8 @@ export function ContactItem() {
         <Grid item xs={12} md={6}>
             <Card sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <CardContent sx={{textAlign: 'start'}}>
-                    <Typography>Mikle</Typography>
-                    <Typography>+7 777 777 77 77</Typography>
+                    <Typography>{contactItem.name}</Typography>
+                    <Typography>{contactItem.phone}</Typography>
                 </CardContent>
                 <CardActions>
                     <IconButton size="small" onClick={handleClickEdit}>
@@ -43,6 +48,7 @@ export function ContactItem() {
         <Modal open={openDelete} onClose={() => setOpenDelete(false)}>
             <ModalInfo 
                 title="Вы точно хотите удалить контакт?"
+                contactItem={contactItem}
                 onClose={() => setOpenDelete(false)}
             />
         </Modal>
@@ -50,6 +56,7 @@ export function ContactItem() {
         <Modal open={openEdit} onClose={() => setOpenEdit(false)}>
             <ModalAction 
                 title="Внесите новые данные"
+                contactItem={contactItem}
                 onClose={() => setOpenEdit(false)}
             />
         </Modal>
