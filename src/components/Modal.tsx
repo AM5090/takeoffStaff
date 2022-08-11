@@ -1,4 +1,4 @@
-import { Dialog, DialogTitle } from "@mui/material";
+import { Box, Dialog, DialogTitle } from "@mui/material";
 import { useEffect, useRef } from "react";
 
 interface IModalProps {

@@ -41,3 +41,26 @@ export const contactsAsyncRequest = (): ThunkAction<void, RootState, unknown, Ac
             console.log(error);
         });
 }
+
+export const contactsPutAsyncRequest = (id: number, editedContact: {name: string, phone: string}): ThunkAction<void, RootState, unknown, Action<string>> => (dispatch, getState) => {
+    axios.put(`http://localhost:3001/contacts/${id}`, {
+        ...editedContact
+    })
+        .then((res) => {
+            dispatch(contactsAsyncRequest());
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}
+
+export const contactsDeleteAsyncRequest = (id: number): ThunkAction<void, RootState, unknown, Action<string>> => (dispatch, getState) => {
+    axios.delete(`http://localhost:3001/contacts/${id}`)
+        .then((res) => {
+            console.log(res);
+            dispatch(contactsAsyncRequest());
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+}
