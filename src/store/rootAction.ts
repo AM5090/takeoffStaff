@@ -34,8 +34,29 @@ export const contactsAction: ActionCreator<IContactsAction> = (contacts: IContac
 export const contactsAsyncRequest = (): ThunkAction<void, RootState, unknown, Action<string>> => (dispatch, getState) => {
     axios.get('http://localhost:3001/contacts')
         .then((res) => {
-            console.log(res.data);
             dispatch(contactsAction(res.data));
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}
+
+export const contactsSearchAsyncRequest = (searchData: string): ThunkAction<void, RootState, unknown, Action<string>> => (dispatch, getState) => {
+    axios.get(`http://localhost:3001/contacts/?q=${searchData}`)
+        .then((res) => {
+            dispatch(contactsAction(res.data));
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+}
+
+export const contactsPostAsyncRequest = (addContact: {name: string, phone: string}): ThunkAction<void, RootState, unknown, Action<string>> => (dispatch, getState) => {
+    axios.post('http://localhost:3001/contacts/',{
+        ...addContact
+    })
+        .then((res) => {
+            dispatch(contactsAsyncRequest());
         })
         .catch((error) => {
             console.log(error);
@@ -57,10 +78,10 @@ export const contactsPutAsyncRequest = (id: number, editedContact: {name: string
 export const contactsDeleteAsyncRequest = (id: number): ThunkAction<void, RootState, unknown, Action<string>> => (dispatch, getState) => {
     axios.delete(`http://localhost:3001/contacts/${id}`)
         .then((res) => {
-            console.log(res);
             dispatch(contactsAsyncRequest());
         })
         .catch((error) => {
             console.log(error);
         })
 }
+

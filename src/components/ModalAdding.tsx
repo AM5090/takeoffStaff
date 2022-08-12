@@ -1,18 +1,17 @@
 import { Box, Button, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from "@mui/material";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
-import { contactsPutAsyncRequest, IContactItem } from "../store/rootAction";
+import { contactsPostAsyncRequest, contactsPutAsyncRequest, IContactItem } from "../store/rootAction";
 
-interface IModalActionProps {
+interface IModalAddingProps {
     title?: string,
     onClose?: () => void,
-    contactItem: IContactItem,
 }
 
-export function ModalAction({title, onClose, contactItem}: IModalActionProps) {
+export function ModalAdding({title, onClose}: IModalAddingProps) {
 
-    const [nameValue, setNameValue] = useState<string>(contactItem?.name);
-    const [phoneValue, setPhoneValue] = useState<string>(contactItem?.phone);
+    const [nameValue, setNameValue] = useState<string>('');
+    const [phoneValue, setPhoneValue] = useState<string>('');
     const dispatch = useDispatch();
 
 
@@ -26,8 +25,8 @@ export function ModalAction({title, onClose, contactItem}: IModalActionProps) {
 
     function handleSubmit(event: FormEvent) {
         event.preventDefault();
-        const editedContact = {name: nameValue, phone: phoneValue};
-        dispatch(contactsPutAsyncRequest(contactItem?.id, editedContact));
+        const addContact = {name: nameValue, phone: phoneValue};
+        dispatch(contactsPostAsyncRequest(addContact));
         onClose?.();
     }
 

@@ -1,5 +1,4 @@
-import { Box, Dialog, DialogTitle } from "@mui/material";
-import { useEffect, useRef } from "react";
+import { Dialog } from "@mui/material";
 
 interface IModalProps {
     open: boolean,
@@ -9,10 +8,8 @@ interface IModalProps {
 
 export function Modal({open, children, onClose}: IModalProps) {
 
-    const ref = useRef<HTMLDivElement>(null)
-
     return (
-        <Dialog open={open} onClose={onClose} ref={ref}>
+        <Dialog open={open} onClose={onClose} >
             {children}
         </Dialog>
     );

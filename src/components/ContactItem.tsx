@@ -13,8 +13,8 @@ interface IContactItemProps {
 
 export function ContactItem({contactItem}: IContactItemProps) {
 
-    const [openDelete, setOpenDelete] = useState(false); 
-    const [openEdit, setOpenEdit] = useState(false);    
+    const [openDelete, setOpenDelete] = useState<boolean>(false); 
+    const [openEdit, setOpenEdit] = useState<boolean>(false);    
 
 
 
