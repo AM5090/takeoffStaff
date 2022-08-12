@@ -24,7 +24,7 @@ export function Contacts() {
             <Control openAdding={() => setOpenAdding(true)}/>
 
             <Grid container spacing={2}>
-                {contacts.map((contactItem) => (
+                {contacts.map((contactItem: IContactItem) => (
                     <ContactItem key={contactItem.id}
                         contactItem={contactItem}
                     />

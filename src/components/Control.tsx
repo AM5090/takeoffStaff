@@ -13,6 +13,7 @@ interface IControlProps {
 export function Control({openAdding}: IControlProps) {
 
     const [searchValue, setSearchValue] = useState<string>('');
+    const [touched, setTouched] = useState<boolean>(false);
     const dispatch = useDispatch();
 
     function handleSearchValue(event: ChangeEvent<HTMLInputElement>) {
@@ -20,15 +21,20 @@ export function Control({openAdding}: IControlProps) {
     }
 
     function handleСleaning() {
-        setSearchValue('');
-        dispatch(contactsAsyncRequest());
+        if(touched) {
+            setSearchValue('');
+            dispatch(contactsAsyncRequest());
+            setTouched(false);
+        }
     }
 
     function handleSubmit(event: FormEvent) {
         event.preventDefault();
         if (searchValue !== '') {
+            setTouched(true);
             dispatch(contactsSearchAsyncRequest(searchValue));
-        } else {
+        } else if(searchValue === '' && touched) {
+            setTouched(false);
             dispatch(contactsAsyncRequest());
         }
     }

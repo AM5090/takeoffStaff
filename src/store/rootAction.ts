@@ -29,7 +29,32 @@ export interface IContactsAction {
 export const contactsAction: ActionCreator<IContactsAction> = (contacts: IContactItem[]) => ({
     type: CONTACTS,
     contacts
-})
+});
+
+interface IUserType {
+    id: number,
+    name: string,
+    password: string,
+    surname: string,
+}
+
+export const logInAsyncRequest = (personAuth: { name: string, pass: string }): ThunkAction<void, RootState, unknown, Action<string>> => (dispatch, getState) => {
+    axios.get('http://localhost:3001/users')
+        .then((res) => {
+            console.log('res', res.data);
+            console.log('personIdentification', personAuth);
+
+            const users = res.data;
+            users.map((user: IUserType) => {
+                if(personAuth.name ===  user.name && personAuth.pass === user.password) {
+                    dispatch(logInAction(true));
+                }
+            })
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}
 
 export const contactsAsyncRequest = (): ThunkAction<void, RootState, unknown, Action<string>> => (dispatch, getState) => {
     axios.get('http://localhost:3001/contacts')

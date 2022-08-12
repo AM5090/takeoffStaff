@@ -16,8 +16,6 @@ export function ContactItem({contactItem}: IContactItemProps) {
     const [openDelete, setOpenDelete] = useState<boolean>(false); 
     const [openEdit, setOpenEdit] = useState<boolean>(false);    
 
-
-
     function handleClickDelete() {
         setOpenDelete(true);
     }

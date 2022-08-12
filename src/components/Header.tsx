@@ -1,7 +1,12 @@
 import { AppBar, Button, Toolbar, Typography } from '@mui/material';
+import { useSelector } from 'react-redux';
 import logo from '../logo.svg';
+import { RootState } from '../store/rootReducer';
 
 export function Header() {
+
+    const logIn = useSelector<RootState, boolean>(state => state.logIn);
+
     return (
         <AppBar position="static">
             <Toolbar>
@@ -11,9 +16,9 @@ export function Header() {
                 <Typography sx={{ flexGrow: 1, textAlign: 'start' }}>
                     Takeoff Staff
                 </Typography>
-                <Button variant="outlined" color="inherit">
+                {logIn && <Button variant="outlined" color="inherit">
                     Log Out
-                </Button>
+                </Button>}
             </Toolbar>
         </AppBar>
     );
