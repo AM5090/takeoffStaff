@@ -1,17 +1,30 @@
 import { Box, Button, Container, Grid, TextField, Typography } from "@mui/material";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
 import { logInAsyncRequest } from "../store/rootAction";
 import { RootState } from "../store/rootReducer";
+import { useNavigate } from "react-router-dom";
+
 
 export function Login() {
 
     const [nameValue, setNameValue] = useState<string>('');
     const [passValue, setPassValue] = useState<string>('');
+    const [touched, setTouched] = useState<boolean>(false);
 
     const logIn = useSelector<RootState, boolean>(state => state.logIn);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+
+    useEffect(() => {
+        if(logIn) {
+            setNameValue('');
+            setPassValue('');
+            navigate('/contacts');
+            setTouched(false);
+        }
+    }, [logIn])
 
     function handleNameValue(event: ChangeEvent<HTMLInputElement>) {
         setNameValue(event.target.value);
@@ -23,12 +36,9 @@ export function Login() {
 
     function handleLogIn(event: FormEvent) {
         event.preventDefault();
+        setTouched(true);
         const personAuth = { name: nameValue, pass: passValue };
         dispatch(logInAsyncRequest(personAuth));
-        if(logIn) {
-            setNameValue('');
-            setPassValue('');
-        }
     }
 
     return (
@@ -59,7 +69,7 @@ export function Login() {
                             size="small" 
                             sx={{mt: '20px'}}
                         />
-                        {logIn && <span>log in</span>}
+                        {touched && !logIn && (<span>Не верный логин или пароль</span>)}
                         <Button variant="text" type="submit" sx={{mt: '20px'}}>Log in</Button>
                     </Box>
 

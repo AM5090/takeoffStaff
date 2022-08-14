@@ -46,10 +46,11 @@ export const logInAsyncRequest = (personAuth: { name: string, pass: string }): T
 
             const users = res.data;
             users.map((user: IUserType) => {
-                if(personAuth.name ===  user.name && personAuth.pass === user.password) {
+                if(personAuth.name === user.name && personAuth.pass === user.password) {
                     dispatch(logInAction(true));
+                    dispatch(contactsAsyncRequest());
                 }
-            })
+            });
         })
         .catch((error) => {
             console.log(error);

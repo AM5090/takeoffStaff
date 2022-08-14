@@ -1,11 +1,20 @@
 import { AppBar, Button, Toolbar, Typography } from '@mui/material';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import logo from '../logo.svg';
+import { logInAction } from '../store/rootAction';
 import { RootState } from '../store/rootReducer';
 
 export function Header() {
 
     const logIn = useSelector<RootState, boolean>(state => state.logIn);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    function handleLogOut() {
+        navigate('/auth');
+        dispatch(logInAction(false));
+    }
 
     return (
         <AppBar position="static">
@@ -16,7 +25,7 @@ export function Header() {
                 <Typography sx={{ flexGrow: 1, textAlign: 'start' }}>
                     Takeoff Staff
                 </Typography>
-                {logIn && <Button variant="outlined" color="inherit">
+                {logIn && <Button onClick={handleLogOut} variant="outlined" color="inherit">
                     Log Out
                 </Button>}
             </Toolbar>
