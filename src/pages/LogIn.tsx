@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logInAsyncRequest } from "../store/rootAction";
 import { RootState } from "../store/rootReducer";
 import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 
 export function Login() {
@@ -21,7 +22,7 @@ export function Login() {
         if(logIn) {
             setNameValue('');
             setPassValue('');
-            navigate('/contacts');
+            //navigate('/contacts');
         }
     }, [logIn])
 
@@ -50,7 +51,7 @@ export function Login() {
         <Container sx={{mt: '15px'}}>
             <Grid container justifyContent="center" alignItems="center" sx={{height: '400px'}}>
                 <Grid item >
-
+                    {logIn && <Navigate to="/contacts" />}
                     <Box component="form" 
                         sx={{ boxShadow: 3, p: '20px', display: 'flex', flexDirection: 'column' }}
                         onSubmit={handleLogIn}
