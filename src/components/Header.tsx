@@ -7,7 +7,7 @@ import { RootState } from '../store/rootReducer';
 
 export function Header() {
 
-    const logIn = useSelector<RootState, boolean>(state => state.logIn);
+    const logIn = useSelector<RootState, boolean | null>(state => state.logIn);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 

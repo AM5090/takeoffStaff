@@ -12,7 +12,7 @@ export function Login() {
     const [passValue, setPassValue] = useState<string>('');
     const [touched, setTouched] = useState<boolean>(false);
 
-    const logIn = useSelector<RootState, boolean>(state => state.logIn);
+    const logIn = useSelector<RootState, boolean | null>(state => state.logIn);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -22,7 +22,6 @@ export function Login() {
             setNameValue('');
             setPassValue('');
             navigate('/contacts');
-            setTouched(false);
         }
     }, [logIn])
 
@@ -40,6 +39,12 @@ export function Login() {
         const personAuth = { name: nameValue, pass: passValue };
         dispatch(logInAsyncRequest(personAuth));
     }
+
+    /***
+     * 
+     * РАЗОБРАТЬСЯ С АВТОРИЗАЦИЕЙ И ВЫВОДОМ ОШИБКИ
+     * 
+     */
 
     return (
         <Container sx={{mt: '15px'}}>
@@ -69,8 +74,9 @@ export function Login() {
                             size="small" 
                             sx={{mt: '20px'}}
                         />
-                        {touched && !logIn && (<span>Не верный логин или пароль</span>)}
+                        {logIn === false && (<span>Не верный логин или пароль</span>)}
                         <Button variant="text" type="submit" sx={{mt: '20px'}}>Log in</Button>
+                        
                     </Box>
 
                 </Grid>

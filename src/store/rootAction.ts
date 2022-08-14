@@ -6,10 +6,10 @@ import axios from 'axios';
 export const LOG_IN = 'LOG_IN';
 export interface ILogInAction {
     type: typeof LOG_IN,
-    logIn: boolean
+    logIn: boolean | null,
 }
 
-export const logInAction: ActionCreator<ILogInAction> = (logIn: boolean) => ({
+export const logInAction: ActionCreator<ILogInAction> = (logIn: boolean | null) => ({
     type: LOG_IN,
     logIn
 });

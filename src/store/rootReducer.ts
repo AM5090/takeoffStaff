@@ -2,12 +2,12 @@ import { Reducer } from "redux";
 import { CONTACTS, IContactItem, IContactsAction, ILogInAction, LOG_IN } from "./rootAction";
 
 export interface RootState {
-    logIn: boolean;
+    logIn: boolean | null;
     contacts: IContactItem[];
 }
 
 const initialState: RootState = {
-    logIn: false,
+    logIn: null,
     contacts: []
 }
 
