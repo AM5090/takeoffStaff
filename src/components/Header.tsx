@@ -2,17 +2,18 @@ import { AppBar, Button, Toolbar, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import logo from '../logo.svg';
-import { logInAction } from '../store/rootAction';
+import { logInAction, logInTouchedAction } from '../store/rootAction';
 import { RootState } from '../store/rootReducer';
 
 export function Header() {
 
-    const logIn = useSelector<RootState, boolean | null>(state => state.logIn);
+    const logIn = useSelector<RootState, boolean>(state => state.logIn);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     function handleLogOut() {
         navigate('/auth');
+        dispatch(logInTouchedAction(false));
         dispatch(logInAction(false));
     }
 

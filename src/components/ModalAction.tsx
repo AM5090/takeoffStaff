@@ -17,11 +17,15 @@ export function ModalAction({title, onClose, contactItem}: IModalActionProps) {
 
 
     function handleChangeName(event: ChangeEvent<HTMLInputElement>) {
-        setNameValue(event.target.value);
+        const text = event.target.value;
+        const replaceNewName = text.replace(/\W/g, '');
+        setNameValue(replaceNewName);
     }
 
     function handleChangePhone(event: ChangeEvent<HTMLInputElement>) {
-        setPhoneValue(event.target.value);
+        const text = event.target.value;
+        const replaceNewPhone = text.replace(/[^+\d]/g, '');
+        setPhoneValue(replaceNewPhone);
     }
 
     function handleSubmit(event: FormEvent) {

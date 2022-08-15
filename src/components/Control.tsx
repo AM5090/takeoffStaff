@@ -17,7 +17,9 @@ export function Control({openAdding}: IControlProps) {
     const dispatch = useDispatch();
 
     function handleSearchValue(event: ChangeEvent<HTMLInputElement>) {
-        setSearchValue(event.target.value);
+        const text = event.target.value;
+        const replaceSearch = text.replace(/\W/g, '');
+        setSearchValue(replaceSearch);
     }
 
     function handleСleaning() {
@@ -50,11 +52,10 @@ export function Control({openAdding}: IControlProps) {
                 add
             </Button>
             <Box component="form" onSubmit={handleSubmit} sx={{display: 'flex', alignItems: 'flex-end', flexDirection: 'row', justifyContent: 'flex-start', width: '100%', ml: '20px'}}>
-                <IconButton sx={{p: '0px 4px 12px 0px', height: '20px'}} 
-                    size="small"
+                <IconButton sx={{m: '0px 4px 4px 0px', p: '2px'}} 
                     onClick={handleСleaning}
                 >
-                    <HighlightOffOutlinedIcon />
+                    <HighlightOffOutlinedIcon  />
                 </IconButton>
                 <FormControl fullWidth>
                     <InputLabel>Search</InputLabel>

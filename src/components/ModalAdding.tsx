@@ -16,11 +16,15 @@ export function ModalAdding({title, onClose}: IModalAddingProps) {
 
 
     function handleChangeName(event: ChangeEvent<HTMLInputElement>) {
-        setNameValue(event.target.value);
+        const text = event.target.value;
+        const replaceName = text.replace(/\W/g, '');
+        setNameValue(replaceName);
     }
 
     function handleChangePhone(event: ChangeEvent<HTMLInputElement>) {
-        setPhoneValue(event.target.value);
+        const text = event.target.value;
+        const replacePhone = text.replace(/[^+\d]/g, '');
+        setPhoneValue(replacePhone);
     }
 
     function handleSubmit(event: FormEvent) {

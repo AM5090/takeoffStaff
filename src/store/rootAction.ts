@@ -6,12 +6,23 @@ import axios from 'axios';
 export const LOG_IN = 'LOG_IN';
 export interface ILogInAction {
     type: typeof LOG_IN,
-    logIn: boolean | null,
+    logIn: boolean,
 }
 
-export const logInAction: ActionCreator<ILogInAction> = (logIn: boolean | null) => ({
+export const logInAction: ActionCreator<ILogInAction> = (logIn: boolean) => ({
     type: LOG_IN,
     logIn
+});
+
+export const LOG_IN_TOUCHED = 'LOG_IN_TOUCHED';
+export interface ILogInTouchedAction {
+    type: typeof LOG_IN_TOUCHED,
+    logInTouched: boolean,
+}
+
+export const logInTouchedAction: ActionCreator<ILogInTouchedAction> = (logInTouched: boolean) => ({
+    type: LOG_IN_TOUCHED,
+    logInTouched
 });
 
 export const CONTACTS = 'CONTACTS';
@@ -41,8 +52,6 @@ interface IUserType {
 export const logInAsyncRequest = (personAuth: { name: string, pass: string }): ThunkAction<void, RootState, unknown, Action<string>> => (dispatch, getState) => {
     axios.get('http://localhost:3001/users')
         .then((res) => {
-            console.log('res', res.data);
-            console.log('personIdentification', personAuth);
 
             const users = res.data;
             users.map((user: IUserType) => {
