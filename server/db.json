@@ -27,11 +27,6 @@
       "id": 4,
       "name": "Arnold Schwarzenegger",
       "phone": "+7 999 999 99 97"
-    },
-    {
-      "name": "New",
-      "phone": "+1232342",
-      "id": 5
     }
   ]
 }

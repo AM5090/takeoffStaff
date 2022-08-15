@@ -1,3 +1,9 @@
+Для запуска приложения используйту скрипт
+
+### `npm run dev`
+
+Версия Node.js v16.14.0
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
